@@ -1,0 +1,22 @@
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+
+# Generated content file
+content.tex
+
+*.markdown.*
+
+# Markdown package temporary directories
+_markdown_*/
+
+# C++ binaries (if you test compile your library)
+*.exe
+*.o
+a.out
+bin/
