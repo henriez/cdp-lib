@@ -1,19 +1,21 @@
-vi _p, _rank;
-
-int _find(int u) { return _p[u] == u ? u: _p[u] = _find(_p[u]); }
-void _union(int u, int v){
-	u = _find(u);
-	v = _find(v);
-	if(_rank[u] < _rank[v]){
-		_p[u] = v;
-	}
-	else{
-		_p[v] = u;
-		if(_rank[u] == _rank[v]) _rank[u]++;
-	}
-}
-void _make(int u){
-	_rank = vi(u, 0);
-	_p = vi(u);
-	for(int i = 0; i < u; i++) _p[i] = i;
-}
+struct DSU {
+    vi p, sz;
+    DSU(int n) {
+        p.resize(n);
+        iota(p.begin(), p.end(), 0);
+        sz.assign(n, 1);
+    }
+    int find(int i) {
+        if (p[i] == i) return i;
+        return p[i] = find(p[i]);
+    }
+    bool unite(int u, int v) {
+        u = find(u);
+        v = find(v);
+        if (u == v) return false;
+        if (sz[u] < sz[v]) swap(u, v);
+        p[v] = u;
+        sz[u] += sz[v];
+        return true;
+    }
+};

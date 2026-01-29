@@ -1,3 +1,5 @@
+// para adicionar negacao usar ~u
+// Ex: a clausula (a v !b) se traduz para add_or(a,~b)
 struct TwoSatSolver {
     int n;
     vvi adj, adjT;

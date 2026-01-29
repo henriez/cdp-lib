@@ -59,18 +59,33 @@ You have a total of m+n people and need to choose k of them. The number of ways 
 **Way 2** Counting by Cases
 
 We can divide the problem into cases, based on how many men ($j$) are chosen for the subcommittee.
-    Case 0: Choose 0 men and k women. The number of ways is  $$\binom{m}{0}\binom{n}{k}$$.
+   
+Case 0: Choose 0 men and k women. The number of ways is $$\binom{m}{0}\binom{n}{k}$$.
     
-    Case 1: Choose 1 man and k-1 women. The number of ways is $$\binom{m}{1}\binom{n}{k-1}$$.
-    Case j: Choose $j$ men and $k-j$ women. The number of ways is $$\binom{m}{j}\binom{n}{k-j}$$.
+Case 1: Choose 1 man and k-1 women. The number of ways is $$\binom{m}{1}\binom{n}{k-1}$$.
+
+Case j: Choose $j$ men and $k-j$ women. The number of ways is $$\binom{m}{j}\binom{n}{k-j}$$.
 
 
 
 ### Other Important Concepts
 - **Catalan Numbers:** A sequence of natural numbers that occurs in various counting problems (e.g., number of binary trees, balanced parenthesis expressions).
-$$C_n = \frac{1}{n+1}\binom{2n}{n}$$
+$$C_n = \binom{2n}{n} - \binom{2n}{n+1}= \frac{1}{n+1}\binom{2n}{n}$$
+
+A commonly used combinatorial proof for the Catalan numbers involves counting the number of lattice (grid) paths from $(0,0)$ to $(n,n)$ that do not cross above the diagonal $y = x$. Each such path consists of $n$ rightward steps and $n$ upward steps, and the Catalan number counts the number of these "Dyck paths" that never go above the diagonal.
+
 
 - **Stirling Numbers of the Second Kind:** The number of ways to partition a set of $n$ labeled objects into $k$ non-empty unlabeled subsets. Denoted by $S(n, k)$ or $$\begin{Bmatrix} n \\ k \end{Bmatrix}$$.
 $$S(n, k) = \frac{1}{k!} \sum_{j=0}^{k} (-1)^{k-j} \binom{k}{j} j^n$$
+
+The Stirling numbers of the second kind can also be computed recursively:
+$$S(n, k) = k \cdot S(n-1, k) + S(n-1, k-1)$$
+with the boundary conditions:
+$$S(0, 0) = 1;\quad S(n, 0) = 0\,\text{for}\,n > 0;\quad S(0, k) = 0\,\text{for}\,k > 0$$
+
+- **Bell Number:**  The Bell number $B^n$ counts the total number of ways to partition a set of $n$ labeled elements into any number (from $1$ up to $n$) of non-empty, unlabeled subsets. It can also be written as a recurrence relation 
+$$B^n = \sum_{k=0}^{n} S(n,k)$$
+
+
 
 - **Pigeonhole Principle:** If $n$ items are put into $m$ boxes, with $n > m$, then at least one box must contain more than one item.
