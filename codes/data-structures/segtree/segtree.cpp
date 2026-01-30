@@ -91,7 +91,6 @@ struct segtree {
     set(i, v, 0, 0, size);
   }
 
-
   void rangeUpdate(int l, int r, int v){
     rangeUpdate(l,r,v,0,0,size);
   }
