@@ -9,10 +9,10 @@ NTT is a fast algorithm (analogous to FFT) for polynomial multiplication modulo 
 
 NTT-friendly primes and their primitive roots:
 
-- Modulus: 998244353, Primitive Root: 3, Maximum N: $2^23$
-- Modulus: 734003201, Primitive Root: 3, Maximum N: $2^20$
-- Modulus: 167772161, Primitive Root: 3, Maximum N: $2^25$
-- Modulus: 469762049, Primitive Root: 3, Maximum N: $2^26$
+- Mod: 998244353, Root: 3, Max N: $2^{23}$
+- Mod: 734003201, Root: 3, Max N: $2^{20}$
+- Mod: 167772161, Root: 3, Max N: $2^{25}$
+- Mod: 469762049, Root: 3, Max N: $2^{26}$
 
 Use the modulus as `MOD` and the root as `ROOT` when instantiating the NTT.
 

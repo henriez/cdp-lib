@@ -1,0 +1,2 @@
+# Matrix template
+A template for square matrices, used for solving linear recurrences with fast exponentiation, memory is on a 1D vector, but can be accessed with \lstinline{A[i][j]} normally (custom \lstinline{operator[]})
