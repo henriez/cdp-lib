@@ -1,12 +1,11 @@
 struct segtree {
+  struct node {
+    int seg, pre, suf, sum;
+  };
   int size;
   vector<node> nodes;
   vector<bool> hasLazy;
   vector<int> lazy;
-
-  struct node {
-    int seg, pre, suf, sum;
-  };
 
   node NEUTRAL = {0,0,0,0};
 
