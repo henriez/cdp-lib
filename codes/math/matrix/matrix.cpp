@@ -65,7 +65,7 @@ struct mat{
   mat operator^(int e){
     return exp(*this, e);
   }
-  static mat exp(mat b, int e){
+  static mat exp(mat b, ll e){
     mat ans = mat(b.n,true);
     while(e>0){
       if(e&1) ans*=b;

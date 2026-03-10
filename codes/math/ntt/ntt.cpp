@@ -1,11 +1,11 @@
+namespace NTT{
     template<typename T, ll MOD, ll ROOT>
     void transform(vector<T>& a, bool invert) {
         int n = a.size();
 
         for (int i = 1, j = 0; i < n; i++) {
             int bit = n >> 1;
-            for (; j & bit; bit >>= 1)
-                j ^= bit;
+            for (; j & bit; bit >>= 1) j ^= bit;
             j ^= bit;
             if (i < j) swap(a[i], a[j]);
         }
@@ -26,8 +26,7 @@
 
         if (invert) {
             T n_inv = T::inv(n);
-            for (T& x : a)
-                x *= n_inv;
+            for (T& x : a) x *= n_inv;
         }
     }
 

@@ -9,7 +9,7 @@ struct DSU {
         if (p[i] == i) return i;
         return p[i] = find(p[i]);
     }
-    bool unite(int u, int v) {
+    bool join(int u, int v) {
         u = find(u);
         v = find(v);
         if (u == v) return false;
