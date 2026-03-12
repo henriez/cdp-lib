@@ -1,63 +1,49 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-typedef long long ll;
-#define MAX 1123
-
-int bit[MAX][MAX], x, y;
-void setbit(int i, int j, int delta) {
-  int j_;
-  while(i <= x) {
-    j_ = j;
-    while(j_ <= y) {
-      bit[i][j_] += delta;
-      j_ += j_ & -j_;
-    }
-    i += i & -i;
+// [l,r] interval cnvention and 0-based indexing
+struct BIT2D {
+  vector<vector<ll>> bit;
+  int n, m;
+  BIT2D(int _n, int _m){
+    n = _n; m = _m;
+    bit.assign(n+1,vector<ll>(m+1));
   }
-}
-ll getbit(int i, int j) {
-  ll ans = 0;
-  int j_;
-  while(i) {
-    j_ = j;
-    while(j_) {
-      ans += bit[i][j_];
-      j_ -= j_ & -j_;
-    }
-    i -= i & -i;
-  }
-  return ans;
-}
+  BIT2D(vector<vector<ll>> &a) {
+    n = a.size();
+    m = a[0].size();
+    bit.assign(n+1, vector<ll>(m+1));
 
-int main(void) {
-  int p;
-  while (scanf("%d %d %d", &x, &y, &p), x || y || p) {
-    for(int i = 0 ; i <=  x; i++)
-      for(int j = 0; j <= y; j++)
-        bit[i][j] = 0;
-    int q;
-    scanf("%d", &q);
-    while(q--) {
-      char c;
-      scanf(" %c",&c);
-      int n, xi, yi, zi, wi;
-      if(c == 'A') {
-        scanf(" %d %d %d", &n, &xi, &yi);
-        xi++; yi++;
-        setbit(xi, yi, n);
-      }
-      else {
-        scanf(" %d %d %d %d", &xi, &yi, &zi, &wi);
-        xi++; yi++; zi++; wi++;
-        if(xi > zi) swap(xi, zi);
-        if(yi > wi) swap(yi, wi);
-        ll ans = getbit(zi, wi) - getbit(zi, yi - 1) 
-        - getbit(xi - 1, wi) + getbit(xi - 1, yi - 1);
-        printf("%lld\n", ans * (ll) p);
+    for (int i = 1; i <= n; i++) 
+      for (int j = 1; j <= m; j++) 
+        bit[i][j] = a[i-1][j-1];
+
+    for (int i = 1; i <= n; i++) {
+      for (int j = 1; j <= m; j++) {
+        int nxt = j + (j&-j);
+        if (nxt <= m) bit[i][nxt] += bit[i][j];
       }
     }
-    printf("\n");
+    for (int i = 1; i <= n; i++) {
+      int nxt = i + (i&-i);
+      if (nxt <= n) {
+        for (int j = 1; j <= m; j++) 
+          bit[nxt][j] += bit[i][j];
+      }
+    }
   }
-  return 0;
-}
+  void add(int si, int sj, ll v){
+    for(int i = si+1; i <= n; i+=i&-i)
+      for (int j = sj+1; j <= m; j+=j&-j)
+        bit[i][j] += v;
+  }
+  ll presum(int si, int sj){
+    ll ans = 0;
+    for (int i = si+1; i > 0; i-=i&-i)
+      for (int j = sj+1; j > 0; j-=j&-j)
+        ans += bit[i][j];
+    return ans;
+  }
+  ll sum(ii ab, ii cd){
+    auto [a,b] = ab;
+    auto [c,d] = cd;
+    return presum(c,d) - presum(a-1,d) - presum(c,b-1) + presum(a-1,b-1);
+  }
+};

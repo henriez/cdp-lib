@@ -1,8 +1,8 @@
-# Bit 2d
-2D Sum BIT, update and sum. The problem must be 1-indexed.
+# BIT (Fenwick Tree) 2D
+2D Sum BIT, update and sum. The struct encapsulates the 1-based indexing, therefore parameters are 0-based indexed.
 
-Query/update time: $\mathcal{O}((\log n)^2)$
+Query/update time: $\mathcal{O}(\log n\cdot\log m)$
 
-Construction time: $\mathcal{O}(n^2(\log n)^2)$
+Construction time (using proper constructor): $\mathcal{O}(nm)$
 
-Space: $\mathcal{O}(n^2)$
+Space: $\mathcal{O}(nm)$
