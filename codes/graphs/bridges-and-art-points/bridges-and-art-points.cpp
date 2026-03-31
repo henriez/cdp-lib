@@ -1,4 +1,4 @@
-vvi
+vvi adj;
 vi in, low;
 int timer;
 set<int> cut_points;

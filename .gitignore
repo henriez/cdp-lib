@@ -20,3 +20,6 @@ _markdown_*/
 *.o
 a.out
 bin/
+
+#vim undofile
+*.un~

@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 
 CATEGORIES = [
+    "extra",
     "data-structures",
     "graphs",
     "dp",
@@ -19,6 +20,7 @@ CATEGORIES = [
 ]
 
 CATEGORY_NAMES = {
+    "extra": "Extra",
     "data-structures": "Data Structures",
     "graphs": "Graphs",
     "dp": "DP",
