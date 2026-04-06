@@ -38,16 +38,16 @@ $$\binom{n}{k} = \binom{n-1}{k} + \binom{n-1}{k-1}$$
 $$\binom{n}{k} = \binom{n}{n-k}$$
 
 - **Row Sum:** The sum of all elements in row $n$ of Pascal's Triangle (where the first row is $n=0$) is equal to $2^n$.
-$$\sum_{k=0}^{n} \binom{n}{k} = 2^n$$
+$$\sum\sb{k=0}^{n} \binom{n}{k} = 2^n$$
 
 - **Hockey Stick Identity:** The sum of elements in a diagonal, starting at $$\binom{r}{r}$$ and ending at $$\binom{n}{r}$$, is equal to the element in the next row and next column, $$\binom{n+1}{r+1}$$.
-$$\sum_{i=r}^{n} \binom{i}{r} = \binom{n+1}{r+1}$$
+$$\sum\sb{i=r}^{n} \binom{i}{r} = \binom{n+1}{r+1}$$
 
 - **Binomial Theorem:**
-$$(x+y)^n = \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^k$$
+$$(x+y)^n = \sum\sb{k=0}^{n} \binom{n}{k} x^{n-k} y^k$$
 
 - **Vandermonde's Identity:**
-$$\sum_{j=0}^{k} \binom{m}{j}\binom{n}{k-j} = \binom{m+n}{k}$$
+$$\sum\sb{j=0}^{k} \binom{m}{j}\binom{n}{k-j} = \binom{m+n}{k}$$
 The easiest way to understand the identity is through a counting problem. \\
 Imagine you have a committee with m men and n women. How many ways can you form a subcommittee of k people?
 
@@ -76,7 +76,7 @@ A commonly used combinatorial proof for the Catalan numbers involves counting th
 
 
 - **Stirling Numbers of the Second Kind:** The number of ways to partition a set of $n$ labeled objects into $k$ non-empty unlabeled subsets. Denoted by $S(n, k)$ or $$\begin{Bmatrix} n \\ k \end{Bmatrix}$$.
-$$S(n, k) = \frac{1}{k!} \sum_{j=0}^{k} (-1)^{k-j} \binom{k}{j} j^n$$
+$$S(n, k) = \frac{1}{k!} \sum\sb{j=0}^{k} (-1)^{k-j} \binom{k}{j} j^n$$
 
 The Stirling numbers of the second kind can also be computed recursively:
 $$S(n, k) = k \cdot S(n-1, k) + S(n-1, k-1)$$
@@ -84,7 +84,7 @@ with the boundary conditions:
 $$S(0, 0) = 1;\quad S(n, 0) = 0\,\text{for}\,n > 0;\quad S(0, k) = 0\,\text{for}\,k > 0$$
 
 - **Bell Number:**  The Bell number $B^n$ counts the total number of ways to partition a set of $n$ labeled elements into any number (from $1$ up to $n$) of non-empty, unlabeled subsets. It can also be written as a recurrence relation 
-$$B^n = \sum_{k=0}^{n} S(n,k)$$
+$$B^n = \sum\sb{k=0}^{n} S(n,k)$$
 
 
 

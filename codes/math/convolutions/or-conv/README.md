@@ -1,2 +1,2 @@
 # OR convolution
-$$c[k] = \sum_{i|j = k}a[i] \cdot b[j]$$
+$$c[k] = \sum\sb{i|j = k}a[i] \cdot b[j]$$
