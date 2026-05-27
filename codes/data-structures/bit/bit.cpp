@@ -20,24 +20,3 @@ struct BIT {
       bit[i] += v;
   }
 };
-
-struct RangeBIT {
-  BIT b1, b2;
-  int n;
-  RangeBIT(int _n){
-    n = _n;
-    b1 = b2 = BIT(n+2);
-  }
-  void add(int l, int r, ll v){
-    b1.add(l,v); 
-    b1.add(r+1,-v);
-    b2.add(l,v*(l-1)); 
-    b2.add(r+1,-v*r);
-  }
-  ll presum(int i){
-    return b1.presum(i)*i - b2.presum(i);
-  }
-  ll sum(int l, int r){
-    return presum(r) - presum(l-1);
-  }
-};
