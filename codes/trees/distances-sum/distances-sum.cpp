@@ -18,23 +18,17 @@ void dfs2(int u, int p, int par_ans){
   for (auto v : adj[u]){
     if (v == p) continue;
     int par_amount = sz[0] - sz[v];
+    // new p_ans is going up for is going up for p
+    // + go up to u and go down to other subtrees 
     dfs2(v,u, par_ans + par_amount + sum - (sum_going_down[v]+sz[v]));
   }
 }
 
 void solve(){
-  int n; cin >> n;
   adj = vvi(n);
   sum_going_down = sum_going_up = vi(n);
   sz = vi(n,1);
-
-  for (int i = 1; i < n; i++){
-    int a, b; cin >> a >> b;
-    a--; b--;
-    adj[a].push_back(b);
-    adj[b].push_back(a);
-  }
-
+  // read adj
   dfs(0,0);
   dfs2(0,0,0);
 

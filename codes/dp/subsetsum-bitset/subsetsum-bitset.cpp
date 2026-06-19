@@ -1,4 +1,3 @@
-# Subset Sum with Bitset
-If you only need reachability:
-Time: $\mathcal{O}(nS/w)$ (where $w$ is sys word size)
-Space: $\mathcal{O}(S)$
+vi a;
+bitset<MAXSUM+1> dp; dp[0] = 1;
+for (int x : a) dp |= (dp << x);

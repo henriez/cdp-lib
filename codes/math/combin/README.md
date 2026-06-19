@@ -17,18 +17,16 @@ $$\binom{k+n-1}{n-1} = \binom{k+n-1}{k}$$
 ### Binomial Coefficient Properties and Pascal's Triangle
 
 - **Pascal's Triangle**
-$$
-\[
-\begin{aligned}
-n=0:& \quad \binom{0}{0} \\
-n=1:& \quad \binom{1}{0} \quad \binom{1}{1} \\
-n=2:& \quad \binom{2}{0} \quad \binom{2}{1} \quad \binom{2}{2} \\
-n=3:& \quad \binom{3}{0} \quad \binom{3}{1} \quad \binom{3}{2} \quad \binom{3}{3} \\
-n=4:& \quad \binom{4}{0} \quad \binom{4}{1} \quad \binom{4}{2} \quad \binom{4}{3} \quad \binom{4}{4} \\
-n=5:& \quad \binom{5}{0} \quad \binom{5}{1} \quad \binom{5}{2} \quad \binom{5}{3} \quad \binom{5}{4} \quad \binom{5}{5}
-\end{aligned}
-\]
-$$
+
+    $\binom{0}{0}$
+
+    $\binom{1}{0} \binom{1}{1}$
+
+    $\binom{2}{0} \binom{2}{1} \binom{2}{2}$
+
+    $\binom{3}{0} \binom{3}{1} \binom{3}{2} \binom{3}{3}$
+
+    $\binom{4}{0} \binom{4}{1} \binom{4}{2} \binom{4}{3} \binom{4}{4}$
 
 
 - **Stifel's Relation:** Each element in Pascal's Triangle is the sum of the two elements immediately above it.

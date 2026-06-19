@@ -1,8 +1,7 @@
-vector<mint<MOD>> lcm_conv(vi a, vi b){
+vector<mint> lcm_conv(vi a, vi b){
   int n = (int)max(a.size(), b.size());
-  a.resize(n);
-  b.resize(n);
-  vector<mint<MOD>> c(n), x(n), y(n);
+  a.resize(n); b.resize(n);
+  vector<mint> c(n), x(n), y(n);
   for (int i = 1; i < n; i++) {
     for (int j = i; j < n; j += i) {
       x[j] += a[i];

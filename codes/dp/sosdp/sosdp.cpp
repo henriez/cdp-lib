@@ -3,7 +3,7 @@ vi a(1<<k);
 // sosdp
 for (int bit = 0; bit < k; bit++){
   for (int mask = 0; mask < (1<<k); mask++){
-    if ((1<<bit) & mask) {
+    if (mask>>bit&1) {
       a[mask] += a[mask ^ (1<<bit)];
     }
   }
@@ -14,7 +14,7 @@ for (int bit = 0; bit < k; bit++){
 // sosdp inverse
 for (int bit = 0; bit < k; bit++){
   for (int mask = 0; mask < (1<<k); mask++){
-    if ((1<<bit) & mask) {
+    if (mask>>bit&1) {
       a[mask] -= a[mask ^ (1<<bit)];
     }
   }
