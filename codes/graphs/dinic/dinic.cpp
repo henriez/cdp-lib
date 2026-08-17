@@ -103,7 +103,6 @@ struct Dinic {
     return matchings;
   }
 
-    
   vii mincut(int s, int t){
     maxflow(s,t);
     queue<int> q; q.push(s);
@@ -121,7 +120,6 @@ struct Dinic {
     }
     
     vii minCutEdges;
-    
     for (int i = 0; i < m; i += 2) {
       const Edge& edge = edges[i];
       if (reachable[edge.u] && !reachable[edge.v]) {
