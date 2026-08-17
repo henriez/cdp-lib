@@ -2,16 +2,34 @@
 
 * **Recurrence form:**
 
+  $$
+  dp\sb{i} = \min\sb{j<i}
+  \left(dp\sb{j} + (h\sb{i} - h\sb{j})^2 + c\right)
+  $$
 
-TODO formulas
+  Expanding:
+
+  $$
+  dp\sb{i} = h\sb{i}^2 + c +
+  \min\sb{j<i}
+  \left((-2h\sb{j})h\sb{i} + h\sb{j}^2 + dp\sb{j}\right)
+  $$
+
+  Thus, for each $j$, insert the line
+
+  $$
+  f\sb{j}(x) = (-2h\sb{j})x + h\sb{j}^2 + dp\sb{j}
+  $$
+
+  and query at $x=h\sb{i}$.
 
   
   
 * **Slope monotonicity:**
-  If coefficients $a_j$ (slopes) are inserted in strictly decreasing (or increasing) order as $j$ grows, and
+  If coefficients $a\sb{j}$ (slopes) are inserted in strictly decreasing (or increasing) order as $j$ grows, and
 
 * **Query monotonicity:**
-  Values $x_i$ for query come in non-decreasing (min) or increasing (max) order consistent with slope order,
+  Values $x\sb{i}$ for query come in non-decreasing (min) or increasing (max) order consistent with slope order,
 
 * **Complexity:**
     * Insertion + amortized query in $\mathcal{O}(1)$ per operation (pointer walk) under monotonicity.
@@ -24,6 +42,7 @@ TODO formulas
 
 The example below solves the $dp$ where the recurrence is:
 
-
-TODO formulas
-
+$$
+dp\sb{i} = \min\sb{j<i}
+\left(dp\sb{j} + (h\sb{i} - h\sb{j})^2 + c\right).
+$$
