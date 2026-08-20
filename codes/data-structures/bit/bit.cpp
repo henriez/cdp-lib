@@ -19,4 +19,16 @@ struct BIT {
     for (++i; i <= n; i += i&-i) 
       bit[i] += v;
   }
+  int find_kth(int k) {
+    int pos = 0, sum = 0, step = 1;
+    while (step <= n) step <<= 1;
+    step >>= 1;
+    for (; step >= 1; step >>= 1) {
+      if (pos+step <= n && sum + bit[pos+step] <= k) {
+        pos += step;
+        sum += bit[pos];
+      }
+    }
+    return pos;
+  }
 };

@@ -4,7 +4,7 @@
 struct segtree {
   struct node {
     struct tag {
-      int val = 0;
+      int val = 0; // make sure default values are correct
       bool has = false;
     };
     Hash hash;
@@ -37,7 +37,7 @@ struct segtree {
       if (lazy.has){
         left.apply(lazy);
           right.apply(lazy);
-          lazy = {0,false};
+          lazy = tag();
       }
     }
     void pull(const node &left, const node &right){

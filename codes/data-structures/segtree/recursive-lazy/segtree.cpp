@@ -2,7 +2,7 @@
 struct segtree {
   struct node {
     struct tag {
-      int a = 0, d = 0;
+      int a = 0, d = 0; // make sure default values are correct
       bool has = false;
     };
     int sum = 0; // data
@@ -27,7 +27,7 @@ struct segtree {
         int mx = (lx + rx) / 2;
         left.apply(lazy, lx, mx);
         right.apply(lazy, mx, rx);
-        lazy = {0, 0, false};
+        lazy = tag();
       }
     }
   };
