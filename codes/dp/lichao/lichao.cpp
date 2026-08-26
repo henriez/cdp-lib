@@ -14,7 +14,10 @@ struct lichao_tree {
       c = identity;
     }
     Line(T m, T c) : m(m), c(c) {}
-    T val(T x) { return m * x + c; }
+    T val(T x) { 
+      if (c==identity) return identity;
+      return m * x + c; 
+    }
   };
 
   struct Node {
@@ -68,6 +71,18 @@ struct lichao_tree {
     // if max lichao, change to >
     if (line.val(l) < cur->line.val(l)) insert(cur->lc, l, mid, line);
     else insert(cur->rc, mid + 1, r, line);
+  }
+  void insert_range(Node* &cur, int lx, int rx, int l, int r, Line line) {
+    if (rx < l || r < lx || lx > rx || l > r) return;
+    if (!cur) cur = new_node();
+    if (l <= lx && rx <= r) return insert(cur,lx,rx,line);
+    int mid = lx + (rx-lx)/2;
+    insert_range(cur->lc, lx, mid, l, r, line);
+    insert_range(cur->rc, mid+1, rx, l, r, line);
+  }
+  // insert a line that is only valid in range [l,r]
+  void insert_range(int m, int c, int l, int r) {
+    insert_range(root,L,R,l,r,Line(m,c));
   }
 
   T query(Node* &cur, T l, T r, T x) {

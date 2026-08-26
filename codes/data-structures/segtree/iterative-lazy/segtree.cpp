@@ -28,17 +28,16 @@ struct segtree {
 
       if (hash.len > 0){
         extend(hash.len-1);
-          hash.h1 = (t.val-OFFSET)*presumpmod1[hash.len-1];
-          hash.h2 = (t.val-OFFSET)*presumpmod2[hash.len-1];
+        hash.h1 = (t.val-OFFSET)*presumpmod1[hash.len-1];
+        hash.h2 = (t.val-OFFSET)*presumpmod2[hash.len-1];
       }
       lazy = t;
     }
     void push(node &left, node &right){
-      if (lazy.has){
-        left.apply(lazy);
-          right.apply(lazy);
-          lazy = tag();
-      }
+      if (!lazy.has) return;
+      left.apply(lazy);
+      right.apply(lazy);
+      lazy = tag(); 
     }
     void pull(const node &left, const node &right){
       tag cur = lazy;
