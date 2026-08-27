@@ -1,7 +1,7 @@
 vvi adj;
 vi in, low;
-int timer;
-set<int> cut_points;
+int timer = 1; // start in 1
+set<int> aps;
 vector<ii> bridges;
 
 void dfs_ap(int u, int p = -1) {
@@ -17,12 +17,12 @@ void dfs_ap(int u, int p = -1) {
       dfs_ap(v, u);
       low[u] = min(low[u], low[v]);
       if (low[v] >= in[u] && p != -1)
-        cut_points.insert(u);
+        aps.insert(u);
       ch++;
     }
   }
   if (p == -1 && ch > 1)
-    cut_points.insert(u);
+    aps.insert(u);
 }
 
 void dfs_bridges(int u, int p = -1) {
@@ -38,12 +38,4 @@ void dfs_bridges(int u, int p = -1) {
         bridges.push_back({u, v});
     }
   }
-}
-
-void init(int n) {
-  timer = 0;
-  in.assign(n, 0);
-  low.assign(n, 0);
-  cut_points.clear();
-  bridges.clear();
 }

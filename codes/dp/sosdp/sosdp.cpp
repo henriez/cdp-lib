@@ -8,9 +8,7 @@ for (int bit = 0; bit < k; bit++){
     }
   }
 }
-
 // do stuff (such as multiplication for OR convolution)
-
 // sosdp inverse
 for (int bit = 0; bit < k; bit++){
   for (int mask = 0; mask < (1<<k); mask++){

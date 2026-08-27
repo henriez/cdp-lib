@@ -2,14 +2,12 @@ template<typename T>
 struct mat{
   vector<T> m;
   int n;
-
   mat(int _n = 0, bool identity = false) : n(_n) {
     m.resize(n*n);
     if (!identity) return;
     for (int i = 0; i < n; i++)
       m[i*n+i] = 1;
   }
-
   mat& operator+=(const mat &o){
     for (int i = 0; i < n; i++){
       int ra = i*n;
@@ -41,15 +39,9 @@ struct mat{
     this->m = ans;
     return *this;
   }
-  friend mat operator+(mat a, const mat& b){
-    return a+=b;
-  }
-  friend mat operator-(mat a, const mat& b){
-    return a-=b;
-  }
-  friend mat operator*(mat a, const mat& b){
-    return a*=b;
-  }
+  friend mat operator+(mat a, const mat& b){return a+=b;}
+  friend mat operator-(mat a, const mat& b){return a-=b;}
+  friend mat operator*(mat a, const mat& b){return a*=b;}
   T* operator[](int i){
     return &m[i*n];
   }
@@ -61,9 +53,6 @@ struct mat{
         ans[i] += m[ra+j]*v[j];
     }
     return ans;
-  }
-  mat operator^(int e){
-    return exp(*this, e);
   }
   static mat exp(mat b, ll e){
     mat ans = mat(b.n,true);

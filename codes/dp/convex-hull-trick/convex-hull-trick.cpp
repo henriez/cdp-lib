@@ -22,9 +22,7 @@ struct CHT {
       return ceilDiv(l.c - c, m - l.m);
     }
   };
-
   deque<pair<Line, int>> dq;
-
   void insert(int m, int c){
     Line newLine(m, c);
     if (!dq.empty() && newLine.m == dq.back().first.m) {
@@ -43,7 +41,6 @@ struct CHT {
     }
     dq.emplace_back(newLine, dq.back().first.intersect(newLine));
   }
-
   // dont use query and queryNonMonotonicValues in the same problem
   int query(int x){
     while (dq.size() > 1){
@@ -53,8 +50,6 @@ struct CHT {
     }
     return dq[0].first.val(x);
   }
-
-
   int queryNonMonotonicValues(int x){
     int l=0, r=dq.size()-1, ans=0;
     while (l <= r) {
@@ -72,10 +67,8 @@ struct CHT {
 
 void solve(){
   int n, c; cin >> n >> c;
-  vi h(n);
+  vi h(n), dp(n);
   for (auto &x : h) cin >> x;
-
-  vi dp(n);
   dp[0] = 0;
   CHT cht;
   cht.insert(-2*h[0], h[0]*h[0]);

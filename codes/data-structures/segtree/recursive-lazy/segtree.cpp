@@ -2,13 +2,13 @@
 struct segtree {
   struct node {
     struct tag {
-      int a = 0, d = 0; // make sure default values are correct
+      int a = 0, d = 0; // be sure default is correct
       bool has = false;
     };
     int sum = 0; // data
     tag lazy;
-    static node combine(const node& left, const node& right) {
-      return {left.sum + right.sum, {0, 0, false}};
+    static node combine(const node& a, const node& b) {
+      return {a.sum + b.sum, {0, 0, false}};
     }
     void leaf(int v) { sum = v; }
     void apply(tag t, int lx, int rx) {
@@ -31,10 +31,8 @@ struct segtree {
       }
     }
   };
-
   int size;
   vector<node> t;
-
   void init(int n) {
     size = 1;
     while (size < n) size *= 2;

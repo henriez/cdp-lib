@@ -8,9 +8,7 @@ vector<mint> and_conv(vector<mint> a, vector<mint> b){
       }
     }
   }
-
   for (int i = 0; i < n; i++) a[i] *= b[i];
-
   for (int j = 1; j < n; j <<= 1)
 	for (int i = 0; i < n; i++)
       if (i&j) a[i^j] -= a[i];

@@ -17,12 +17,10 @@ for (int i = 1; i <= n; i++){
     }
   }
 }
-
 if (!dp[n][target]) {
   cout << -1 << endl;
   return;
 }
-
 vi subset;
 ii pos = {n,target};
 while(pos != ii(0,0)){

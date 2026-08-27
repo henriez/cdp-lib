@@ -37,7 +37,6 @@ auto spfa = [&](int s, int n) -> pair<vi, vi> {
       }
     }
   }
-
   while (!neg_q.empty()) {
     int u = neg_q.front(); neg_q.pop();
     dist[u] = -INF;

@@ -4,7 +4,6 @@ namespace DoubleHashing {
   using mint2 = mint<MOD2>;
   vector<mint1> pmod1{1}, invpmod1{1};
   vector<mint2> pmod2{1}, invpmod2{1};
-
   const int MAX_VAL = 256;
   const int OFFSET = 'a'-1;
   mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
@@ -12,7 +11,6 @@ namespace DoubleHashing {
   const mint2 p2 = uniform_int_distribution<int>(MAX_VAL+1, MOD2-1)(rng);
   const mint1 inv1 = mint1::inv(p1);
   const mint2 inv2 = mint2::inv(p2);
-
   void extend(int n){
     while(pmod1.size() <= n){
       pmod1.push_back(pmod1.back()*p1);
@@ -42,7 +40,6 @@ namespace DoubleHashing {
       return h1.val == o.h1.val && h2.val == o.h2.val && len == o.len;
     }
   };
-
   struct PrefixHash {
     vector<Hash> pref;
     PrefixHash(const string &s){

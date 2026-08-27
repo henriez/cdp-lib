@@ -1,5 +1,4 @@
-// heavily inspired by 
-// github.com/brunomaletta/biblioteca
+// heavily inspired by brunomaletta/biblioteca
 using T = long long; // change to ld if necessary
 const ld DINF = 2e18;
 const ld pi = acosl(-1.0);
@@ -11,7 +10,6 @@ int sgn(T x) {
     return (x > eps) - (x < -eps);
   return (x > 0) - (x < 0);
 }
-
 struct pt {
   T x, y;
   pt(T x_ = 0, T y_ = 0) : x(x_), y(y_) {}
@@ -32,7 +30,6 @@ struct pt {
 		return in >> p.x >> p.y;
 	}
 };
-
 struct line {
   pt p, q;
   line() {}
@@ -49,41 +46,32 @@ ld dist(pt p, pt q) {
 }
 T dist2(pt p, pt q) {return sq(p.x-q.x) + sq(p.y-q.y);}
 ld norm(pt v) { return dist(pt(0, 0), v); }
-
 // Angle with +x axis in [0, 2*pi)
 ld angle(pt v) { 
   ld ang = atan2((ld)v.y, (ld)v.x); 
   return ang < 0 ? ang + 2*pi : ang; 
 }
-
 // 2x signed area of triangle p-q-r (>0 if ccw)
 T sarea2(pt p, pt q, pt r) { return (q-p)^(r-q); }
-
 // True if p, q, r are collinear
 bool col(pt p,pt q,pt r){return sgn(sarea2(p,q,r))==0;}
-
-// True if r is strictly to the left of directed line p->q
+// True if r is strictly to the left of line p->q
 bool ccw(pt p,pt q,pt r) {return sgn(sarea2(p,q,r))>0;}
-
 bool isvertical(line r) {return sgn(r.p.x-r.q.x) == 0;}
-
 // True if point p lies on segment r
 bool isinseg(pt p, line r) {
   pt a = r.p - p, b = r.q - p;
   return sgn(a ^ b) == 0 && sgn(a * b) <= 0;
 }
-
 bool interseg(line r, line s) {
   if (isinseg(r.p, s) || isinseg(r.q, s) || 
       isinseg(s.p, r) || isinseg(s.q, r)) return 1;
   return ccw(r.p, r.q, s.p) != ccw(r.p, r.q, s.q) &&
          ccw(s.p, s.q, r.p) != ccw(s.p, s.q, r.q);
 }
-
 ld disttoline(pt p, line r) { 
   return (ld)abs(sarea2(p, r.p, r.q)) / dist(r.p, r.q); 
 }
-
 ld disttoseg(pt p, line r) {
   if (sgn((r.q-r.p)*(p-r.p)) < 0) return dist(r.p,p);
   if (sgn((r.p-r.q)*(p-r.q)) < 0) return dist(r.q,p);
@@ -98,7 +86,6 @@ ld polarea(const vector<pt> &v) {
     ans += (v[i] ^ v[(i+1)%sz(v)]);
   return abs((ld)ans / 2.0);
 }
-
 // Returns 0 if out, 1 if inside, 2 if on border
 int inpol(const vector<pt> &v, pt p) {
   int qt = 0;
@@ -117,7 +104,6 @@ int inpol(const vector<pt> &v, pt p) {
   }
   return qt != 0;
 }
-
 // Monotone chain convex hull - O(N log N)
 // icol - include_collinear
 vector<pt> convex_hull(vector<pt> v, bool icol = 0) {
@@ -145,7 +131,6 @@ vector<pt> convex_hull(vector<pt> v, bool icol = 0) {
   l.insert(l.end(), all(u));
   return l;
 }
-
 // d^2 of closest pair - O(N log N)
 T closest_pair(vector<pt> v) {
   if (sz(v) <= 1) return 0;
@@ -156,8 +141,8 @@ T closest_pair(vector<pt> v) {
     int m = l + (r-l)/2;
     T mid = v[m].x;
     T ans = min(go(go, l, m), go(go, m, r));
-    merge(v.begin()+l, v.begin()+m, v.begin()+m, v.begin()+r, 
-          t.begin(), [](pt a, pt b) {return sgn(a.y - b.y) < 0;}
+    merge(begin(v)+l, begin(v)+m, begin(v)+m, begin(v)+r,
+          begin(t),[](pt a,pt b){return sgn(a.y-b.y)<0;}
       );
     copy(t.begin(), t.begin()+(r-l), v.begin()+l);
     int k = 0;
@@ -173,11 +158,9 @@ T closest_pair(vector<pt> v) {
   };
   return go(go, 0, sz(v));
 }
-
 struct convex_pol {
   vector<pt> pol;
-  convex_pol(vector<pt> v) : pol(convex_hull(v)) {}
-  
+  convex_pol(vector<pt> v) : pol(convex_hull(v)) {} 
   // O(log N) check if p is inside convex polygon
   bool is_inside(pt p) {
     if (pol.empty()) return false;
@@ -192,7 +175,6 @@ struct convex_pol {
     if (l == (int)sz(pol)) return false;
     return !ccw(p, pol[l], pol[l-1]);
   }
-  
   // O(log N) extreme vertex given custom comparator
   int extreme(const function<bool(pt, pt)>& cmp) {
     int n = sz(pol);
@@ -214,14 +196,12 @@ struct convex_pol {
     }
     return l;
   }
-  
   // O(log N) furthest vertex in direction of vector v
   int max_dot(pt v) { 
     return extreme(
       [&](pt p, pt q) { return sgn(p*v - q*v) > 0; }
     ); 
   }
-  
   // O(log N) indices of tangent vertices 
   // from point p strictly outside
   pair<int, int> tangents(pt p) {
@@ -242,28 +222,23 @@ pt rotate(pt p, ld th) {
     p.x*sin(th) + p.y*cos(th)
   ); 
 }
-
 pt rotate90(pt p) { return pt(-p.y, p.x); }
-
 // Scalar t such that 
 // r.p + t*(r.q - r.p) intersects line pt(0,0) -> v
 ld get_t(pt v, line r) { 
   return (ld)(r.p^r.q) / (ld)((r.p-r.q)^v); 
 }
-
 pt proj(pt p, line r) {
   if (r.p == r.q) return r.p;
   r.q = r.q - r.p; p = p - r.p;
   return r.q * ((p*r.q) / (r.q*r.q)) + r.p;
 }
-
 pt inter(line r, line s) {
   if (sgn((r.p - r.q) ^ (s.p - s.q)) == 0) 
     return pt(DINF, DINF);
   pt rq = r.q - r.p;
   return rq * get_t(rq, s) + r.p;
 }
-
 // Cuts polygon with line r leaving points 
 // strictly to the left of r
 vector<pt> cut_polygon(vector<pt> v, line r) {
@@ -280,7 +255,6 @@ vector<pt> cut_polygon(vector<pt> v, line r) {
     ans.pop_back();
   return ans;
 }
-
 struct circle {
   pt c; ld r; // customizable to ll
   circle(pt x, pt y, pt z) {
@@ -291,7 +265,6 @@ struct circle {
   }
   circle(pt c, ld r) : c(c), r(r) {}
 };
-
 vector<pt> circ_line_inter(const line &l, circle &c) {
   vector<pt> ans;
   pt b = l.q - l.p, a = l.p - c.c;
@@ -303,7 +276,6 @@ vector<pt> circ_line_inter(const line &l, circle &c) {
     ans.push_back(c.c+a+b*(-B-sqrt(max((ld)0, D)))/A);
   return ans;
 }
-
 vector<pt> circ_inter(circle ca, circle cb) {
   pt a = ca.c, b = cb.c;
   ld r = ca.r, R = cb.r, d = dist(a, b);
@@ -330,7 +302,6 @@ pt centroid(const vector<pt>& v) {
   }
   return c / (3.0 * A);
 }
-
 // Num of integer lattice points on polygon boundary
 int boundary_pts(const vector<pt>& v) {
   int b = 0;
@@ -338,9 +309,8 @@ int boundary_pts(const vector<pt>& v) {
     pt p = v[i], q = v[(i+1)%sz(v)];
     b += gcd(abs((int)(p.x-q.x)),abs((int)(p.y-q.y)));
   }
-  return b;
-} // Obs: Interior points I = (2*Area-B+2)/2 (Pick's)
-
+  return b; // Obs: Interior pts I = (2*Area-B+2)/2
+}
 // Minkowski sum of two CONVEX polygons - O(N+M)
 void reorder_pol(vector<pt>& p) {
   int pos = 0;
@@ -364,8 +334,7 @@ vector<pt> minkowski(vector<pt> P, vector<pt> Q) {
   }
   return ans;
 }
-
-// O(N) diameter of CONVEX polygon by rotating calipers
+// O(N) diameter of CONVEX pol by rotating calipers
 ld diameter(vector<pt> p) {
   if(sz(p) <= 1) return 0;
   if(sz(p) == 2) return dist(p[0], p[1]);
@@ -383,7 +352,6 @@ ld diameter(vector<pt> p) {
 // --- FLOAT ONLY (REQUIRE 'using T = ld;') --- //
 // ============================================ //
 
-// Half-plane representation for HPI
 struct halfplane {
   pt p, pq; ld ang;
   halfplane() {}
@@ -401,7 +369,6 @@ struct halfplane {
     return p + pq * t;
   }
 };
-
 // Half-Plane Intersection - O(N log N)
 // Returns convex polygon bounding the intersection
 vector<pt> hpi(vector<halfplane> H) {
@@ -426,7 +393,6 @@ vector<pt> hpi(vector<halfplane> H) {
   ans.push_back(q.back().inter(q.front()));
   return vector<pt>(all(ans));
 }
-
 // Minimum Enclosing Circle (Welzl's Algorithm)
 // O(N) randomized
 circle welzl(vector<pt> v) {
@@ -457,11 +423,9 @@ bool operator<(const line& a, const line& b) {
   if (sgn(a1 - a2) != 0) return a1 < a2;
   return ccw(a.p, a.q, b.p);
 }
-
 bool operator==(const line& a, const line& b) {
   return !(a < b) && !(b < a);
 }
-
 // Sweep-line state comparator
 // (horizontal sweep, vertical sort)
 struct cmp_sweepline {
@@ -473,7 +437,6 @@ struct cmp_sweepline {
     return ccw(a.p, b.q, b.p);
   }
 };
-
 // Sweep-angle state comparator
 // (radial sweep, distance sort)
 struct cmp_sweepangle {

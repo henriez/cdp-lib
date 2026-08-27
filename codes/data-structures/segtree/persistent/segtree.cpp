@@ -8,18 +8,15 @@ struct persistent_segtree {
     }
     void leaf(int v) { sum = v; }
   };
-
   int size;
   vector<node> t;
   vi root; // root node id for each version
-
   persistent_segtree(const vi &a) {
     size = 1;
     while (size < a.size()) size <<= 1;
     t.push_back(node());
     root.push_back(build(0, size, a));
   }
-
   int build(int lx, int rx, const vi &a) {
     int x = t.size();
     t.push_back(node());
@@ -34,7 +31,6 @@ struct persistent_segtree {
     t[x].sum = node::combine(t[t[x].lc], t[t[x].rc]).sum;
     return x;
   }
-
   int update(int i, int v, int old, int lx, int rx) {
     int x = t.size();
     t.push_back(t[old]);
@@ -60,7 +56,6 @@ struct persistent_segtree {
     root.push_back(root[version]);
     return root.size() - 1;
   }
-
   node query(int l, int r, int x, int lx, int rx) {
     if (lx >= r || rx <= l || x == 0) return node();
     if (lx >= l && rx <= r) return t[x]; 

@@ -1,17 +1,14 @@
 struct DSU {
   vi p, sz;
-  DSU(int n) {
-    p.resize(n);
+  DSU(int n) : p(n), sz(n,1) {
     iota(p.begin(), p.end(), 0);
-    sz.assign(n, 1);
   }
   int find(int i) {
     if (p[i] == i) return i;
     return p[i] = find(p[i]);
   }
   bool join(int u, int v) {
-    u = find(u);
-    v = find(v);
+    u = find(u), v = find(v);
     if (u == v) return false;
     if (sz[u] < sz[v]) swap(u, v);
     p[v] = u;

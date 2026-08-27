@@ -1,5 +1,3 @@
-// odd[i] - max half length of odd palindromes centered in [i]
-// even[i] - max half length of even palindromes centered in [i] (right part)
 // ex:   a b a b b a c a
 // odd:  1 2 2 1 1 1 2 1
 // even: 0 0 0 0 2 0 0 0

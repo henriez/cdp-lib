@@ -6,7 +6,7 @@ struct MoUpdate {
   };
   vector<Query> queries;
   vector<ii> updates;
-  vector<int> a;
+  vi a;
 
   MoUpdate(vector<int> &v, int q) : block_sz(round(cbrt(2*v.size()*v.size()))) {
     n = v.size() + q;
@@ -48,18 +48,9 @@ struct MoUpdate {
     }
     return ans;
   }
-
-  // customize depending on problem
-  int ans = 0;
-
-  void init(){
-    // initialize custom stuff
-  }
-  void remove(int i) {
-    // remove a[i] from the current ans
-  }
-  void add(int i) {
-    // add a[i] to the current ans
-  }
+  int ans = 0; // custom stuff
+  void init(){} // initialize custom stuff
+  void remove(int i) {} // remove a[i] from ans
+  void add(int i) {} // add a[i] to ans
   int get_ans() {}
 };

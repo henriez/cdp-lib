@@ -7,31 +7,15 @@ struct segtree {
       int val = 0; // make sure default values are correct
       bool has = false;
     };
-    Hash hash;
+    Hash hash; // custom stuff
     int len = 0;
     tag lazy;
-    static node combine(const node &a, const node &b){
-      if (a.len == 0) return b;
-      if (b.len == 0) return a;
-      extend(a.hash.len);
-      auto h1 = a.hash.h1 + pmod1[a.hash.len]*b.hash.h1;
-      auto h2 = a.hash.h2 + pmod2[a.hash.len]*b.hash.h2;
-      return {
-        {h1,h2,a.hash.len+b.hash.len},
-        a.len+b.len,
-        {0,false}
-      };
-    }
+    // combine custom stuff
+    static node combine(const node &a, const node &b){}
     void apply(tag t){
       if (!t.has) return;
-      // set hash as (t.val-offset)*sum
-
-      if (hash.len > 0){
-        extend(hash.len-1);
-        hash.h1 = (t.val-OFFSET)*presumpmod1[hash.len-1];
-        hash.h2 = (t.val-OFFSET)*presumpmod2[hash.len-1];
-      }
-      lazy = t;
+      // apply tag too custom stuff
+      lazy = t; // remember to upd lazy tag
     }
     void push(node &left, node &right){
       if (!lazy.has) return;
@@ -55,7 +39,7 @@ struct segtree {
     t.assign(2*n, node());
     
     for (int i = 0; i < sz; i++) {
-        t[i+n].len = 1;
+        t[i+n].len = 1; // init custom stuff
         t[i+n].hash.len = 1;
         t[i+n].apply({a[i], true});
     }

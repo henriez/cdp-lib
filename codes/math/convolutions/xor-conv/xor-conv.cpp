@@ -12,7 +12,6 @@ void fwht(vector<mint> &a, bool inv){
   }
   if (inv) for (auto &x : a) x /= n;
 }
-
 vector<mint> xor_conv(vector<mint> a, vector<mint> b){
   int n = a.size();
   fwht(a,0), fwht(b, 0);

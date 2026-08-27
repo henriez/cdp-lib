@@ -1,7 +1,6 @@
 vvi adj, up;
 vi tin, tout;
 int timer = 0;
-
 void dfs(int u, int p){
   tin[u] = timer++;
   for (auto v : adj[u]){
@@ -14,11 +13,9 @@ void dfs(int u, int p){
   }
   tout[u] = timer++;
 }
-
 int isAncestor(int u, int v){
   return tin[u] <= tin[v] && tout[v] <= tout[u];
 }
-
 int lca(int u, int v){
   if (isAncestor(u,v)) return u;
   if (isAncestor(v,u)) return v;

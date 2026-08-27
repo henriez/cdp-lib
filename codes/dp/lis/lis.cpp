@@ -1,5 +1,5 @@
-// dp[i] := min value a subsequence of length i+1 can end in
-// dp is an increasing sequence, allowing for bin search
+// dp[i] := min value subseq of len i+1 can end in
+// dp is increasing sequence -> BS
 int lis(const vi &a){
   vi dp;
   for (int x : a){

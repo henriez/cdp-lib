@@ -2,7 +2,6 @@ struct SCCCondenser {
   int n, timer, scc_cnt;
   vi in, low, scc;
   stack<int> st;
-
   SCCCondenser(const vvi& adj) {
     n = adj.size();
     in.assign(n, 0);
@@ -12,7 +11,6 @@ struct SCCCondenser {
     for (int i = 0; i < n; ++i)
       if (!in[i]) dfs(i, adj);
   }
-
   void dfs(int u, const vvi& adj) {
     in[u] = low[u] = ++timer;
     st.push(u);
@@ -33,13 +31,11 @@ struct SCCCondenser {
       scc_cnt++;
     }
   }
-
   // Returns {DAG, Aggregated Values}
   pair<vvi, vi> build(const vvi& adj, const vi& val) {
     vvi dag(scc_cnt);
     vi scc_val(scc_cnt);
     set<ii> edges;
-
     for (int u = 0; u < n; ++u) {
       scc_val[scc[u]] += val[u]; // Aggregate values
       for (int v : adj[u]) {

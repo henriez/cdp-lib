@@ -12,7 +12,7 @@ struct SAM {
     st.reserve(2*s.length());
     st.push_back(State());
     last = 0;
-    for (int i = 0; i < s.length(); i++) extend(s[i], i);
+    for (int i = 0; i < s.size(); i++) extend(s[i],i);
     calc_cnt();
   }
   void extend(char c, int id) {
@@ -52,13 +52,11 @@ struct SAM {
     int sz = st.size();
     int mx = 0;
     for (auto &s : st) mx = max(mx, s.len);
-
     vi c(mx+1);
     vi nodes(sz);
     for (int i = 0; i < sz; i++) c[st[i].len]++;
     for (int i = 1; i <= mx; i++) c[i] += c[i-1];
     for (int i = 0; i < sz; i++) nodes[--c[st[i].len]] = i;
-
     for (int i = sz-1; i >= 0; i--) {
       int u = nodes[i];
       if (st[u].link != -1) st[st[u].link].cnt += st[u].cnt;
@@ -118,7 +116,6 @@ struct SAM {
     for (int i = 1; i <= n; i++){
       ans[i] = ans[i-1]+diff[i];
     }
-
     return ans;
   }
   vector<ll> dp;
