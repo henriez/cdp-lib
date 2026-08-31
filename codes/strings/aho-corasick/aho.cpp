@@ -1,7 +1,7 @@
 const int MAX = 1e6;
 namespace aho {
   int next[MAX][26];
-  int link[MAX], sz = 0, freq[MAX];
+  int link[MAX], sz = 0, freq[MAX], exit[MAX];
   vi leaves[MAX], order;
   void insert(const string& pat, int id) {
     int u = 0;
@@ -24,6 +24,7 @@ namespace aho {
         int l = link[u];
         while (l != -1 && !next[l][x]) l = link[l];
         link[v] = l == -1 ? 0 : next[l][x];
+        exit[v] = leaves[link[v]].empty() ? exit[link[v]] : link[v];
         q.push(v);
       }
     }
